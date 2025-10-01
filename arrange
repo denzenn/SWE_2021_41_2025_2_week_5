@@ -1,0 +1,21 @@
+#!/bin/sh
+
+FILES_DIR="./files"
+
+for file in "$FILES_DIR"/*; do
+    if [ -f "$file" ]; then
+        first_char=$(basename "$file" | cut -c1 | tr '[:upper:]' '[:lower:]')
+        mkdir -p "$FILES_DIR/$first_char"
+        mv "$file" "$FILES_DIR/$first_char/"
+    fi
+done
+
+echo "Files arranged by first letter!"
+
+for folder in "$FILES_DIR"/*; do
+    if [ -d "$folder" ]; then
+        echo "$folder:"
+        ls -a "$folder"
+        echo ""
+    fi
+done
